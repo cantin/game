@@ -14,23 +14,23 @@
 ActiveRecord::Schema.define(version: 20150822015625) do
 
   create_table "gifts", force: :cascade do |t|
-    t.string   "grade",      limit: 255
-    t.string   "name",       limit: 255
-    t.integer  "amount",     limit: 4
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.string   "grade"
+    t.string   "name"
+    t.integer  "amount"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "user_gifts", force: :cascade do |t|
-    t.integer "user_id", limit: 4
-    t.integer "gift_id", limit: 4
+    t.integer "user_id"
+    t.integer "gift_id"
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "name",       limit: 255
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
-    t.string   "role",       limit: 255
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string   "role"
   end
 
 end

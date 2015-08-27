@@ -31,7 +31,7 @@ class GiftsController < ApplicationController
 
 
     if @gift.amount > @gift.users.count
-      @gift.users << @users.sample
+      @gift.users = @users.sample(@gift.amount)
     else
       flash[:error] = "奖品不够咯"
     end
