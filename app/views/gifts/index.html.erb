@@ -4,7 +4,6 @@
 <table class="ui table">
   <thead>
     <tr>
-      <th>奖品类别</th>
       <th>奖品名称</th>
       <th>数量</th>
       <th class="six wide column">中奖人</th>
@@ -15,10 +14,9 @@
   <tbody>
     <% @gifts.each do |gift| %>
       <tr>
-        <td><%= gift.grade %></td>
         <td><%= gift.name if gift.users.count > 0 %></td>
         <td><%= gift.amount %></td>
-        <td><%= gift.users.pluck(:name).join(',') %></td>
+        <td><%= gift.users.pluck(:name).join(', ') %></td>
         <td><%= link_to '抽奖', luck_gift_path(gift) %></td>
         <td><%= link_to '重置', reset_gift_path(gift) %></td>
         <td><%= link_to '编辑', edit_gift_path(gift) %></td>
