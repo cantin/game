@@ -29,9 +29,10 @@ class GiftsController < ApplicationController
     user_ids = UserGift.pluck(:user_id)
     @users = User.where.not(id: user_ids)
 
+    left_amount = @gift.amount - @gift.users.count
 
-    if @gift.amount > @gift.users.count
-      @gift.users = @users.sample(@gift.amount)
+    if left_amount > 0
+      @gift.users << @users.sample(left_amount)
     else
       flash[:error] = "奖品不够咯"
     end
