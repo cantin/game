@@ -7,7 +7,7 @@ namespace :import do
     raise "No such file: #{file}" unless File.exist?(file)
 
     CSV.open(file, headers: true).each do |row|
-      User.create! name: row[0]
+      User.create! name: row[0], role: row[1]
     end
   end
 
@@ -17,7 +17,9 @@ namespace :import do
     raise "No such file: #{file}" unless File.exist?(file)
 
     CSV.open(file, headers: true).each do |row|
-      Gift.create! name: row[0], amount: row[1].to_i
+      a = { name: row[0], amount: row[1].to_i }
+      a[:grade] = row[2] if row[2]
+      Gift.create! a
     end
   end
 end

@@ -21,13 +21,13 @@ class GiftsController < ApplicationController
   def luck
     @gift = Gift.find params[:id]
 
-    # if @gift.name == '杯子'
-    #   user_ids = UserGift.includes(:gift).where(gifts: {name: ['杯子']}).pluck(:user_id)
-    #   @users = User.where.not(id: user_ids).where(role: 'student')
-    # end
-
-    user_ids = UserGift.pluck(:user_id)
-    @users = User.where.not(id: user_ids)
+    if @gift.grade.present?
+       user_ids = UserGift.includes(:gift).where(gifts: {name: [@gift.name]}).pluck(:user_id)
+       @users = User.where.not(id: user_ids).where(role: @gift.grade)
+     else
+       user_ids = UserGift.pluck(:user_id)
+       @users = User.where.not(id: user_ids)
+     end
 
     left_amount = @gift.amount - @gift.users.count
 
